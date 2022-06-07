@@ -1,0 +1,69 @@
+<div class="tui-container">
+
+    <form [formGroup]="electionForm" (ngSubmit)="submit()">
+        <div class="tui-row tui-row_sme">
+            <div class="tui-col_8">
+                <h3 class="tui-form__header tui-form__header_margin-top_none">
+                    Create a Election
+                </h3>
+                <div class="tui-form__row">
+                    <tui-input
+                            tuiTextfieldExampleText="Enter name"
+                            formControlName="name"
+                            tuiHintContent="Enter the name of the team"
+                    >
+                        Name
+                        <span class="tui-required"></span>
+                    </tui-input>
+                    <tui-field-error
+                            formControlName="name"
+                    ></tui-field-error>
+                </div>
+                <div class="tui-form__row">
+                    <tui-input-date
+                            [min]="min"
+                            [max]="max"
+                            [(ngModel)]="from"
+                                    formControlName="startTime">
+                        Start Time
+                    </tui-input-date>
+                    <tui-field-error
+                            formControlName="startTime"
+                    ></tui-field-error>
+                </div>
+                <div class="tui-form__row">
+                    <tui-input-date
+                            [min]="from || min"
+                            [items]="items"
+                            [(ngModel)]="to"
+                            formControlName="endTime">
+                        End Time
+                    </tui-input-date>
+                    <tui-field-error
+                            formControlName="endTime"
+                    ></tui-field-error>
+                </div>
+                <div class="tui-form__buttons">
+                    <button
+                            tuiButton
+                            size="l"
+                            type="submit"
+                            class="tui-form__button"
+                    >
+                        Submit
+                    </button>
+                    <button
+                            tuiButton
+                            type="button"
+                            appearance="flat"
+                            size="l"
+                            class="tui-form__button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

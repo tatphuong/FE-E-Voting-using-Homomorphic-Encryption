@@ -1,0 +1,150 @@
+<div class="tui-container">
+    <div class="row">
+        <div class="col">
+            <!--list candidate to add -->
+            <div class="row border-bottom p-2 m-3">
+                <form
+                        class="b-form"
+                        [formGroup]="formAddCandidate"
+                >
+                    <tui-combo-box
+                            formControlName="candidate"
+                            [stringify]="stringify"
+                    >
+                        Candidate
+                        <tui-data-list *tuiDataList>
+                            <button
+                                    *ngFor="let candidate of candidates | tuiFilterByInputWith : stringify"
+                                    tuiOption
+                                    [value]="candidate"
+                            >
+                                {{candidate.name}}
+                            </button>
+                        </tui-data-list>
+                    </tui-combo-box>
+                    <button
+                            tuiButton
+                            size="s"
+                            icon="tuiIconPlus"
+                            (click)="addCandidate()"
+                            class="mt-2"
+                    >
+                        Add candidate to election
+                    </button>
+                    <tui-notification
+                            status="success"
+                            class="tui-space_top-4"
+                            *ngIf="message!=null"
+                    >
+                        {{this.message}}
+                    </tui-notification>
+
+
+                </form>
+            </div>
+            <!--form edit eletion-->
+            <div class="row m-0 p-0">
+                <form [formGroup]="electionEditForm" (ngSubmit)="submit()">
+                    <div class="tui-row_align_center">
+                        <div>
+                            <h3 class="tui-form__header">
+                                Edit Election
+                            </h3>
+
+                            <div class="tui-form__row">
+                                <tui-input
+                                        tuiTextfieldExampleText="Enter name"
+                                        formControlName="name"
+                                        tuiHintContent="Enter the name of the team"
+                                >
+                                    Name
+                                    <span class="tui-required"></span>
+                                </tui-input>
+                                <tui-field-error
+                                        formControlName="name"
+                                ></tui-field-error>
+                            </div>
+                            <div class="tui-form__row">
+                                <tui-input-date
+                                        [min]="min"
+                                        [max]="max"
+                                        [(ngModel)]="from"
+                                        formControlName="startTime">
+                                    Start Time
+                                </tui-input-date>
+                                <tui-field-error
+                                        formControlName="startTime"
+                                ></tui-field-error>
+                            </div>
+                            <div class="tui-form__row">
+                                <tui-input-date
+                                        [min]="from || min"
+                                        [items]="items"
+                                        [(ngModel)]="to"
+                                        formControlName="endTime">
+                                    End Time
+                                </tui-input-date>
+                                <tui-field-error
+                                        formControlName="endTime"
+                                ></tui-field-error>
+                            </div>
+                            <div class="tui-form__buttons">
+                                <button
+                                        tuiButton
+                                        size="l"
+                                        type="submit"
+                                        class="tui-form__button"
+                                >
+                                    Submit
+                                </button>
+                                <button
+                                        tuiButton
+                                        type="button"
+                                        appearance="flat"
+                                        size="l"
+                                        class="tui-form__button"
+                                        routerLink="/elections"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!--List candidate in election-->
+        <div class="col border-left m-3">
+            <h3 class="tui-text_h3">List Candidate</h3>
+
+            <table tuiTable [columns]="columns">
+                <thead>
+                <tr tuiThGroup>
+                    <th *tuiHead="'name'" tuiTh>Name</th>
+                    <th *tuiHead="'citizenIdentity'" tuiTh>citizenIdentity</th>
+                    <th *tuiHead="'dateOfBirth'" tuiTh>Date of birth</th>
+                    <th *tuiHead="'avatar'" tuiTh [sorter]="null">Avatar</th>
+                    <th *tuiHead="'nationality'" tuiTh>Nationality</th>
+                    <th *tuiHead="'numberOfVotes'" tuiTh>Poll</th>
+                </tr>
+                </thead>
+                <tbody tuiTbody [data]="candidatesInElection">
+                <tr *tuiRow="let item of candidatesInElection; let index = index" tuiTr>
+                    <td *tuiCell="'name'" tuiTd>{{index + 1}}. {{item.candidate.name}}</td>
+                    <td *tuiCell="'citizenIdentity'" tuiTd>
+                        {{item.candidate.citizenIdentity}}
+                    </td>
+                    <td *tuiCell="'dateOfBirth'" tuiTd>{{item.candidate.dateOfBirth}}</td>
+                    <td *tuiCell="'avatar'" tuiTd>
+                        <tui-avatar class="tui-space_top-1" [avatarUrl]="item.candidate.avatar"></tui-avatar>
+                    </td>
+                    <td *tuiCell="'nationality'" tuiTd>{{item.candidate.nationality}}</td>
+                    <td *tuiCell="'numberOfVotes'" tuiTd>{{item.numberOfVotes}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+</div>

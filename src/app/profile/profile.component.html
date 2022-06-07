@@ -1,0 +1,95 @@
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <header class="jumbotron p-5">
+      <h3>
+          <tui-badged-content
+                  colorBottom="var(--tui-success-fill)"
+                  size="l"
+                  class="tui-space_right-5"
+                  [rounded]="true"
+          >
+                  <tui-avatar
+                          text="{{currentUser.username.substr(0,1)}}"
+                          size="l"
+                          [rounded]="true"
+                  ></tui-avatar>
+          </tui-badged-content>
+        <strong>{{ currentUser.username.toUpperCase() }}</strong> Profile
+      </h3>
+    </header>
+    <div class="info p-3">
+        <p>
+            <strong>Email:</strong>
+            {{ currentUser.email }}
+        </p>
+        <p>
+            <strong>Name:</strong>
+            {{ fullUserInfo.name }}
+        </p>
+        <p>
+            <strong>Gender:</strong>
+            {{ fullUserInfo.gender }}
+        </p>
+        <p>
+            <strong>Date of birth:</strong>
+            {{ fullUserInfo.dateOfBirth }}
+        </p>
+        <p>
+            <strong>citizenIdentity:</strong>
+            {{ fullUserInfo.citizenIdentity }}
+        </p>
+        <p>
+            <strong>Role:</strong>
+            {{ fullUserInfo.roles[0].name }}
+        </p>
+    </div>
+
+<!--    -->
+    <!--<form [formGroup]="fullProfile" (ngSubmit)="(currentUser.id)">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" formControlName="username" disabled></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" formControlName="name" disabled></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" formControlName="email" disabled></td>
+            </tr>
+            <tr>
+                <td>Date of birth</td>
+                <td><input type="text" formControlName="dateOfBirth" disabled></td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td><input type="text" formControlName="sex" disabled></td>
+            </tr>
+            <tr>
+                <td>Join in</td>
+                <td><input type="text" formControlName="dayIn" disabled></td>
+            </tr>
+            <tr>
+                <td>About</td>
+                <td><textarea  formControlName="about" ></textarea></td>
+            </tr>
+            <tr>
+                <td>Self Introduce</td>
+                <td><textarea  formControlName="selfIntroduce"></textarea></td>
+            </tr>
+            <tr>
+                <td>Programming Languages</td>
+                <td><input type="text" formControlName="progLanguages"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button>Cập nhật</button></td>
+            </tr>
+        </table>
+    </form>-->
+  </div>
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>

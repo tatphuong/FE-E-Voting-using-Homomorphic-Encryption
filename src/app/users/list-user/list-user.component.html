@@ -1,0 +1,63 @@
+<div class="tui-space_top-1 list-container">
+    <h3 class="tui-text_h3">List user | <a href="users/create">Create new user</a></h3>
+    <div class="tui-row m-5">
+        <!--        <div class="tui-col_xs-12 tui-col_md-12 tui-col_lg-12">-->
+
+
+        <table tuiTable [columns]="columns">
+            <thead>
+            <tr tuiThGroup>
+                <th *tuiHead="'name'" tuiTh>Name</th>
+                <th *tuiHead="'email'" tuiTh>Email</th>
+                <th *tuiHead="'dateOfBirth'" tuiTh>Date of birth</th>
+                <th *tuiHead="'gender'" tuiTh>Gender</th>
+                <th *tuiHead="'address'" tuiTh>Address</th>
+                <th *tuiHead="'citizenIdentity'" tuiTh>Citizen ID</th>
+                <th *tuiHead="'avatar'" tuiTh [sorter]="null">Avatar</th>
+                <th *tuiHead="'actions'" tuiTh [sorter]="null">Action</th>
+            </tr>
+            </thead>
+            <tbody tuiTbody [data]="users">
+            <tr *tuiRow="let item of users; let index = index" tuiTr>
+                <td *tuiCell="'name'" tuiTd>{{index + 1}}. {{item.name}}</td>
+                <td *tuiCell="'email'" tuiTd><a *ngIf="item.email" tuiLink [href]="'mailto:' + item.email">
+                    {{item.email}}
+                </a></td>
+                <td *tuiCell="'dateOfBirth'" tuiTd>{{item.dateOfBirth}}</td>
+                <td *tuiCell="'gender'" tuiTd>{{item.gender}}</td>
+                <td *tuiCell="'address'" tuiTd>{{item.address}}</td>
+                <td *tuiCell="'citizenIdentity'" tuiTd>{{item.citizenIdentity}}
+                </td>
+                <td *tuiCell="'avatar'" tuiTd>
+                    <tui-avatar class="tui-space_top-1" [avatarUrl]="item.avatar"></tui-avatar>
+                </td>
+                <td *tuiCell="'actions'" tuiTd>
+                    <button
+                            tuiIconButton
+                            appearance="flat"
+                            class="remove"
+                            shape="rounded"
+                            title="Edit"
+                            size="l"
+                            icon="tuiIconEdit"
+                            (click)="redirectUpdate(item.id)"
+
+
+                    ></button>
+                    <button
+                            tuiIconButton
+                            appearance="flat"
+                            size="l"
+                            icon="tuiIconTrash"
+                            title="Remove"
+                            shape="rounded"
+                            class="remove"
+                            (click)="remove(item)"
+                    ></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--        </div>-->
+    </div>
+</div>

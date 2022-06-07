@@ -1,0 +1,52 @@
+<div class="list-container tui-space_top-1">
+    <h3 class="tui-text_h3">List Election | <a href="elections/create">Create election</a></h3>
+    <div class="tui-row">
+        <!--        <div class="tui-col_xs-12 tui-col_md-12 tui-col_lg-12">-->
+
+
+        <table tuiTable [columns]="columns" class="tui-island_size_l">
+            <thead>
+            <tr tuiThGroup>
+                <th *tuiHead="'name'" tuiTh>Name</th>
+                <th *tuiHead="'startTime'" tuiTh>Start Time</th>
+                <th *tuiHead="'endTime'" tuiTh>End Time</th>
+                <th *tuiHead="'actions'" tuiTh [sorter]="null">Action</th>
+            </tr>
+            </thead>
+            <tbody tuiTbody [data]="elections">
+            <tr *tuiRow="let item of elections; let index = index" tuiTr>
+                <td *tuiCell="'name'" tuiTd>{{index + 1}}. {{item.name}}</td>
+                <td *tuiCell="'startTime'" tuiTd>{{item.startTime}}
+                </td>
+                <td *tuiCell="'endTime'" tuiTd>{{item.endTime}}
+                </td>
+                <td *tuiCell="'actions'" tuiTd>
+                    <button
+                            tuiIconButton
+                            appearance="flat"
+                            class="remove"
+                            shape="rounded"
+                            title="Edit"
+                            size="l"
+                            icon="tuiIconEdit"
+                            (click)="redirectUpdate(item.id)"
+
+
+                    ></button>
+                    <button
+                            tuiIconButton
+                            appearance="flat"
+                            size="l"
+                            icon="tuiIconTrash"
+                            title="Remove"
+                            shape="rounded"
+                            class="remove"
+                            (click)="remove(item)"
+                    ></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--        </div>-->
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="tui-row">
+    <div class="tui-col mr-3 mt-3">
+        <tui-accordion class="container">
+            <tui-accordion-item>
+                Tên cuộc bầu cử
+                <ng-template tuiAccordionItemContent>
+                    {{election.name}}
+                </ng-template>
+            </tui-accordion-item>
+            <tui-accordion-item>
+                Ngày bắt đầu
+                <ng-template tuiAccordionItemContent>
+                    <div #content>
+                        {{election.startTime}}
+                    </div>
+                </ng-template>
+            </tui-accordion-item>
+            <tui-accordion-item>
+                Ngày kết thúc
+                <ng-template tuiAccordionItemContent>
+                    {{election.endTime}}
+                </ng-template>
+            </tui-accordion-item>
+            <tui-accordion-item>
+                Mã QR
+                <ng-template tuiAccordionItemContent>
+
+                        <div *ngIf="isVoted">
+                            <p>Your ballot---> {{ballot}}</p>
+                            <qrcode [qrdata]="ballot.toString()" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                        </div>
+
+                </ng-template>
+            </tui-accordion-item>
+        </tui-accordion>
+    </div>
+    <div class="tui-col">
+        <h3 class="tui-text_h3 mt-2">Danh sách ứng cử viên</h3>
+        <tui-notification
+                *ngIf="isVoted"
+                status="success"
+                class="tui-space_top-4 mb-3"
+
+        >
+            Bạn đã bỏ phiếu
+        </tui-notification>
+        <tui-notification
+                status="error"
+                class="tui-space_top-4"
+                *ngIf="message!=''"
+        >
+            {{message}}
+        </tui-notification>
+
+        <table tuiTable [columns]="columns" class="mt-4">
+            <thead>
+            <tr tuiThGroup>
+                <th *tuiHead="'name'" tuiTh>Name</th>
+                <th *tuiHead="'citizenIdentity'" tuiTh>citizenIdentity</th>
+                <th *tuiHead="'dateOfBirth'" tuiTh>Date of birth</th>
+                <th *tuiHead="'avatar'" tuiTh [sorter]="null">Avatar</th>
+                <th *tuiHead="'nationality'" tuiTh>Nationality</th>
+                <th *tuiHead="'numberOfVotes'" tuiTh>Poll</th>
+                <th *tuiHead="'action'" tuiTh>Action</th>
+            </tr>
+            </thead>
+            <tbody tuiTbody [data]="candidatesInElection">
+            <tr *tuiRow="let item of candidatesInElection; let index = index" tuiTr>
+                <td *tuiCell="'name'" tuiTd>{{index + 1}}. {{item.candidate.name}}</td>
+                <td *tuiCell="'citizenIdentity'" tuiTd>
+                    {{item.candidate.citizenIdentity}}
+                </td>
+                <td *tuiCell="'dateOfBirth'" tuiTd>{{item.candidate.dateOfBirth}}</td>
+                <td *tuiCell="'avatar'" tuiTd>
+                    <tui-avatar class="tui-space_top-1" [avatarUrl]="item.candidate.avatar"></tui-avatar>
+                </td>
+                <td *tuiCell="'nationality'" tuiTd>{{item.candidate.nationality}}</td>
+                <td *tuiCell="'numberOfVotes'" tuiTd>{{item.numberOfVotes}}</td>
+                <td *tuiCell="'action'" tuiTd>
+                    <button *ngIf="!isVoted"
+                            (click)="voting(item.candidate.id)"
+                            tuiButton
+                            type="button"
+                            appearance="accent"
+                            class="tui-space_right-3 tui-space_bottom-3"
+                    >
+                        Bỏ phiếu</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+
+    </div>
+</div>
+

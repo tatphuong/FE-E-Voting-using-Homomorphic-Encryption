@@ -1,0 +1,149 @@
+<div class="tui-container">
+
+    <form [formGroup]="userForm" (ngSubmit)="submit()">
+        <div class="tui-row tui-row_sme">
+            <div class="tui-col_8">
+                <h3 class="tui-form__header">
+                    Create a User
+                </h3>
+                <div class="tui-form__row">
+                    <tui-input
+                            tuiTextfieldExampleText="Enter name"
+                            formControlName="name"
+                            tuiHintContent="Enter the full name"
+                    >
+                        Full name
+                        <span class="tui-required"></span>
+                    </tui-input>
+                    <tui-field-error
+                            formControlName="name"
+                    ></tui-field-error>
+                </div>
+                <div class="tui-form__row">
+                    <tui-input
+                            tuiTextfieldExampleText="Enter email"
+                            formControlName="email"
+                            tuiHintContent="Enter the email"
+                            ngModel [email]="true"
+                    >
+                        Email
+                        <span class="tui-required"></span>
+                    </tui-input>
+                    <tui-field-error
+                            formControlName="email"
+                    ></tui-field-error>
+                </div>
+
+                <div class="tui-form__row">
+                    <tui-input-password
+                            formControlName="password"
+                            tuiHintContent=""
+                            tuiHintDirection="right"
+                            tuiHintMode="onDark"
+                    >
+                        Type a password
+                    </tui-input-password>
+                    <tui-field-error
+                            formControlName="password"
+                    ></tui-field-error>
+                </div >
+                <div class="tui-form__row">
+                    <tui-input
+                            tuiTextfieldExampleText="citizenIdentity"
+                            formControlName="citizenIdentity"
+                            tuiHintContent="Enter citizen Identity"
+                    >
+                        Citizen Identity
+                        <span class="tui-required"></span>
+                    </tui-input>
+                    <tui-field-error
+                            formControlName="citizenIdentity"
+                    ></tui-field-error>
+                </div>
+                <div class="tui-form__row">
+                    <tui-multi-select
+                            tuiTextfieldExampleText="Ignored text"
+                            class="b-form"
+                            formControlName="roles"
+                            [tuiTextfieldLabelOutside]="true"
+                            [editable]="false"
+                            [(search)]="search"
+                    >
+                        Choose roles
+                        <tui-data-list-wrapper
+                                *tuiDataList
+                                tuiMultiSelectGroup
+                                [items]="filter(search)"
+                        ></tui-data-list-wrapper>
+                    </tui-multi-select>
+
+                </div>
+                <div class="tui-form__row">
+                    <tui-input-date [min]="min" [max]="max"
+                                    formControlName="dateOfBirth">
+                        Date of Birth
+                    </tui-input-date>
+                    <tui-field-error
+                            formControlName="dateOfBirth"
+                    ></tui-field-error>
+                </div>
+                <div class="tui-form__row">
+                    <tui-select formControlName="gender">
+                        Gender
+                        <input tuiTextfield placeholder="Choose gender" />
+                        <tui-data-list-wrapper
+                                *tuiDataList
+                                [items]="genders"
+                        ></tui-data-list-wrapper>
+                    </tui-select>
+                </div>
+                <div class="tui-form__row">
+                    <tui-input
+                            tuiTextfieldExampleText="Enter url avatar"
+                            formControlName="avatar"
+                            tuiHintContent="Enter the url of avatar"
+                    >
+                        Avatar
+                        <span class="tui-required"></span>
+                    </tui-input>
+                </div>
+                <div class="tui-form__row">
+                    <tui-input-date [min]="min" [max]="max"
+                                    formControlName="dayIn">
+                        Join in
+                    </tui-input-date>
+                </div>
+                <div class="tui-form__row">
+                    <tui-text-area
+                            formControlName="about"
+                            class="tui-space_bottom-4 field-large"
+                    >
+                        General introduction about the member
+                    </tui-text-area>
+
+                </div>
+
+                <div class="tui-form__buttons">
+                    <button
+                            tuiButton
+                            size="l"
+                            type="submit"
+                            class="tui-form__button"
+                    >
+                        Submit
+                    </button>
+                    <button
+                            tuiButton
+                            type="button"
+                            appearance="flat"
+                            size="l"
+                            class="tui-form__button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

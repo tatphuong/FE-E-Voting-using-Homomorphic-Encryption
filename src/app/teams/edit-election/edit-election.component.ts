@@ -92,7 +92,7 @@ export class EditElectionComponent implements OnInit {
     });
   }
   getAllCandidateInElection() {
-    this.electionService.getTotalVotes(this.id).subscribe(candidatesInElection => {
+    this.electionService.getTotalVoteForAD(this.id).subscribe(candidatesInElection => {
       this.candidatesInElection=candidatesInElection;
     });
   }

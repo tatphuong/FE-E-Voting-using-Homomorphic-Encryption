@@ -66,7 +66,7 @@
             </thead>
             <tbody tuiTbody [data]="candidatesInElection">
             <tr *tuiRow="let item of candidatesInElection; let index = index" tuiTr>
-                <td *tuiCell="'name'" tuiTd>{{index + 1}}. {{item.candidate.name}}</td>
+                <td *tuiCell="'name'" tuiTd><a href="candidates/{{item.candidate.id}}">{{index + 1}}. {{item.candidate.name}}</a></td>
                 <td *tuiCell="'citizenIdentity'" tuiTd>
                     {{item.candidate.citizenIdentity}}
                 </td>

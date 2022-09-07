@@ -20,13 +20,16 @@ import {
     TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ViewCandidateComponent } from './view-candidate/view-candidate.component';
+import {TuiSheetModule} from "@taiga-ui/addon-mobile";
 
 
 @NgModule({
   declarations: [
       ListCandidateComponent,
       CreateCandidateComponent,
-      EditCandidateComponent
+      EditCandidateComponent,
+      ViewCandidateComponent
   ],
     imports: [
         CommonModule,
@@ -44,7 +47,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         TuiDataListWrapperModule,
         TuiNotificationModule,
         TuiTextfieldControllerModule,
-        TuiHintControllerModule
+        TuiHintControllerModule,
+        TuiSheetModule
     ]
 })
 export class CandidatesModule { }

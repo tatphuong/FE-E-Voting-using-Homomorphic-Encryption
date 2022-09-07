@@ -39,6 +39,9 @@ export class ElectionService {
   getTotalVotes(id:number) :Observable<any> {
     return this.http.get<any>(`${API_URL}/${id}/totalVotes`,this.httpOptions);
   }
+  getTotalVoteForAD(id:number) :Observable<any> {
+    return this.http.get<any>(`${API_URL}/${id}/totalVotesAD`,this.httpOptions);
+  }
   voting(id:number,votingReq:VotingRequest) :Observable<bigint> {
     return this.http.post<bigint>(`${API_URL}/${id}/voting`,votingReq,this.httpOptions);
   }

@@ -12,6 +12,7 @@ import {Election} from "../../_model/election";
     styleUrls: ['./voting.component.css']
 })
 export class VotingComponent implements OnInit {
+    present:Date=new Date();
     candidatesInElection: any;
     election:Election;
     id: number;
@@ -19,10 +20,12 @@ export class VotingComponent implements OnInit {
     user: User;
     ballot: bigint;
     votingReq: VotingRequest | null;
-    message=''
-    readonly value = [13769, 12367, 10172, 3018, 2592];
-    readonly labels = ['Food', 'Cafe', 'Open Source', 'Taxi', 'Other'];
+    message='';
+    showVote=false;
+    // readonly value = [13769, 12367, 10172, 3018, 2592];
+    // readonly labels = ['Food', 'Cafe', 'Open Source', 'Taxi', 'Other'];
     readonly columns = ['name', 'citizenIdentity', 'dateOfBirth', 'avatar', 'nationality', 'numberOfVotes', 'action']
+    // readonly columns = ['name', 'citizenIdentity', 'dateOfBirth', 'avatar', 'nationality', 'action']
 
     constructor(private electionService: ElectionService,
                 private activatedRoute: ActivatedRoute,
@@ -34,7 +37,6 @@ export class VotingComponent implements OnInit {
         this.checkVoted(this.id, this.user.id);
         this.getBallot(this.id, this.user.id);
         this.getElection(this.id);
-        console.log(this.ballot)
     }
 
     ngOnInit(): void {
@@ -55,6 +57,13 @@ export class VotingComponent implements OnInit {
     getElection(id:number){
         this.electionService.findElectionById(id).subscribe(election =>{
             this.election=election;
+            let endTimeS =election.endTime.split("-")
+            const endTime=new Date(endTimeS[2],endTimeS[1]-1,endTimeS[0]);
+            console.log(endTime.toDateString())
+            if(this.present.getTime()>endTime.getTime()){
+                this.showVote=true;
+                console.log("thank to" + this.showVote);
+            }
         })
     }
 
